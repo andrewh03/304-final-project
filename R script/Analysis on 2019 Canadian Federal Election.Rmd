@@ -1,0 +1,54 @@
+---
+title: "Analysis on 2019 Canadian Federal Election: What would be different if everyone had voted?"
+author: "a student from sta304"
+date: "09/12/2020"
+output: 
+  pdf_document: default
+  html_document: 
+    df_print: paged
+bibliography: reference.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(broom)
+```
+# Data input
+
+
+# Abstract 
+
+
+# Keywords 
+Vote, First choice (will add more)
+
+# Introduction
+The 2019 Canadian federal election (formally the 43rd Canadian general election) was held on October 21, 2019, to elect members of the House of Commons to the 43rd Canadian Parliament. The Liberal Party, led by incumbent Prime Minister Justin Trudeau, won 157 seats to form a minority government and lost the majority they had won in the 2015 election. The Liberals lost the popular vote to the Conservatives, which marks only the second time in Canadian history that a governing party formed a government while receiving less than 35 per cent of the national popular vote. (Wikipedia, 2019) However, when looking at the dataset of 2019 Canadian Federal Election, it is necessary to mention that there exist a lot of people who didn't vote to any party. If everyone who didn't vote had voted for their first choice, how this would affect the results of the election?
+
+
+
+# Methodology
+## Data
+
+
+## Model
+
+
+
+# Results
+
+
+
+# Discussion
+## Summary
+
+
+## Conclusion
+
+
+## Weakness & Next Steps
+
+
+# References
+Please refer to the file "reference.bib".
