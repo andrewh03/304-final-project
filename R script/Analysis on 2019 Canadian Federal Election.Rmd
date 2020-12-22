@@ -15,14 +15,15 @@ library(tidyverse)
 library(broom)
 ```
 # Data input
-```{r,echo=FALSE}
+```{r,include=FALSE}
 setwd("/Users/hyp/Desktop/304-final-project-main")
 survey_data <- read_csv("survey_data.csv")
 census_data <- read_csv("census_data.csv")
 ```
+Load in both survey data and census data.
 
 # Abstract 
-The following report is about the analysis on 
+The following report is about the analysis on the assumption that how the voting result would change if people who didn't vote all vote to the Liberal Party.
 
 # Keywords 
 Vote, First choice, Liberal Party
