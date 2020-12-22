@@ -16,14 +16,16 @@ library(broom)
 ```
 # Data input
 ```{r,echo=FALSE}
-
+setwd("/Users/hyp/Desktop/304-final-project-main")
+survey_data <- read_csv("survey_data.csv")
+census_data <- read_csv("census_data.csv")
 ```
 
 # Abstract 
 The following report is about the analysis on 
 
 # Keywords 
-Vote, First choice (will add more)
+Vote, First choice, Liberal Party
 
 # Introduction
 The 2019 Canadian federal election (formally the 43rd Canadian general election) was held on October 21, 2019, to elect members of the House of Commons to the 43rd Canadian Parliament. The Liberal Party, led by incumbent Prime Minister Justin Trudeau, won 157 seats to form a minority government and lost the majority they had won in the 2015 election. The Liberals lost the popular vote to the Conservatives, which marks only the second time in Canadian history that a governing party formed a government while receiving less than 35 per cent of the national popular vote. (Wikipedia, 2019) However, when looking at the dataset of 2019 Canadian Federal Election, it is necessary to mention that there exist a lot of people who didn't vote to any party. If everyone who didn't vote had voted for their first choice, how this would affect the results of the election? Will Liberal party still win the election? In other words, if everyone voted to their first choice, how many of them would vote for Liberal party?
@@ -34,11 +36,30 @@ Two datasets will be used in this analysis. One is called "2019 Canadian Electio
 
 # Methodology
 ## Data
-To process the analysis, I cleaned up both survey data and census data first. 
+To process the analysis, I cleaned up both survey data and census data first. These data are saved as "survey_data.csv" and "census_data.csv". 
 
 ## Model
+```{r}
+attach(survey_data)
+# Build the model
+logitm <- glm(vote_liberal ~ as.factor(sex) + as.factor(age) + as.factor(education))
+detach(survey_data)
+```
 
+## Post-Stratification
+```{r, echo=FALSE}
+census_data$logodds_estimate <- 
+  logitm %>% 
+  predict(newdata = census_data)
 
+census_data$estimate <- 
+  exp(census_data$logodds_estimate)/(1+exp(census_data$logodds_estimate))
+
+yps <- census_data %>% 
+  mutate(alp_predict_prop = estimate*n) %>% 
+  summarise(alp_predict = sum(alp_predict_prop)/sum(n))
+yps
+```
 
 # Results
 

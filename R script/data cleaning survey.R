@@ -22,7 +22,6 @@ raw_data_survey <- labelled::to_factor(raw_data_survey)
 reduced_data_survey <- 
   raw_data_survey %>% 
   select(cps19_votechoice,
-         cps19_citizenship,
          cps19_gender,
          cps19_education,
          cps19_age
@@ -34,4 +33,34 @@ reduced_data_survey <- reduced_data_survey %>%
            ifelse(cps19_votechoice == "Liberal Party", 1, 0))
 
 # mutate some variables to clean up
+reduced_data_survey <- reduced_data_survey %>% 
+  mutate(cps19_gender = case_when(
+    cps19_gender == "A man" ~ "Male",
+    cps19_gender == "A woman" ~ "Female", 
+    cps19_gender == "Other (e.g. Trans, non-binary, two-spirit, gender-queer)" ~ "Don't know"
+  ))
 
+reduced_data_survey <- reduced_data_survey %>% 
+  mutate(cps19_education = case_when(
+    cps19_education == "Bachelor's degree" ~ "Bachelor's degree (e.g. B.A., B.Sc., LL.B.)",
+    cps19_education == "Master's degree" ~ "University certificate, diploma or degree above the bach...", 
+    cps19_education == "Some technical, community college, CEGEP, College Classique" ~ "College, CEGEP or other non-university certificate or di...",
+    cps19_education == "Completed secondary/ high school" ~ "High school diploma or a high school equivalency certificate",
+    cps19_education == "Professional degree or doctorate" ~ "University certificate, diploma or degree above the bach...", 
+    cps19_education == "Completed technical, community college, CEGEP, College Classique" ~ "College, CEGEP or other non-university certificate or di...", 
+    cps19_education == "Some university" ~ "Don't know"
+  ))
+
+# rename
+reduced_data_survey <- reduced_data_survey %>% 
+  rename(age = cps19_age)
+
+reduced_data_survey <- reduced_data_survey %>% 
+  rename(sex = cps19_gender)
+
+reduced_data_survey <- reduced_data_survey %>% 
+  rename(education = cps19_education)
+
+
+write_csv(reduced_data_survey, "/Users/hyp/Desktop/304-final-project-main/survey_data.csv")
+  
